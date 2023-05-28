@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.menesdurak.squizd.common.Resource
 import com.menesdurak.squizd.data.local.entity.Word
 import com.menesdurak.squizd.domain.use_case.words.AddWordUseCase
+import com.menesdurak.squizd.domain.use_case.words.GetAllWordsFromCategoryUseCase
 import com.menesdurak.squizd.domain.use_case.words.GetAllWordsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -15,6 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class WordsViewModel @Inject constructor(
     private val getAllWordsUseCase: GetAllWordsUseCase,
+    private val getAllWordsFromCategoryUseCase: GetAllWordsFromCategoryUseCase,
     private val addWordUseCase: AddWordUseCase
 ) : ViewModel() {
 
@@ -25,6 +27,13 @@ class WordsViewModel @Inject constructor(
         viewModelScope.launch {
             _wordsList.value = Resource.Loading
             _wordsList.value = getAllWordsUseCase()!!
+        }
+    }
+
+    fun getAllWordsFromCategory(categoryId: Int) {
+        viewModelScope.launch {
+            _wordsList.value = Resource.Loading
+            _wordsList.value = getAllWordsFromCategoryUseCase(categoryId)!!
         }
     }
 

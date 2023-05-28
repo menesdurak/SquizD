@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.menesdurak.squizd.common.Resource
 import com.menesdurak.squizd.data.local.entity.Category
@@ -64,7 +65,8 @@ class CategoriesFragment : Fragment() {
     }
 
     private fun onItemClick(categoryId: Int) {
-        Toast.makeText(requireContext(), categoryId.toString(), Toast.LENGTH_SHORT).show()
+        val action = CategoriesFragmentDirections.actionCategoriesFragmentToWordsFragment(categoryId)
+        findNavController().navigate(action)
     }
 
 }
