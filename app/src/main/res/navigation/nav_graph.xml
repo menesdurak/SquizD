@@ -9,5 +9,18 @@
         android:id="@+id/categoriesFragment"
         android:name="com.menesdurak.squizd.presentation.categories.CategoriesFragment"
         android:label="fragment_categories"
-        tools:layout="@layout/fragment_categories" />
+        tools:layout="@layout/fragment_categories" >
+        <action
+            android:id="@+id/action_categoriesFragment_to_wordsFragment"
+            app:destination="@id/wordsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/wordsFragment"
+        android:name="com.menesdurak.squizd.presentation.words.WordsFragment"
+        android:label="fragment_words"
+        tools:layout="@layout/fragment_words" >
+        <argument
+            android:name="categoryId"
+            app:argType="integer" />
+    </fragment>
 </navigation>
