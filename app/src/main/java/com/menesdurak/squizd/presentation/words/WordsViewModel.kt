@@ -1,4 +1,4 @@
-package com.menesdurak.squizd.presentation
+package com.menesdurak.squizd.presentation.words
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
