@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.menesdurak.squizd.common.Resource
 import com.menesdurak.squizd.data.local.entity.Category
 import com.menesdurak.squizd.databinding.FragmentCategoriesBinding
+import com.menesdurak.squizd.presentation.words.WordsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -20,12 +21,19 @@ class CategoriesFragment : Fragment() {
     private var _binding: FragmentCategoriesBinding? = null
     private val binding get() = _binding!!
     private val categoriesViewModel: CategoriesViewModel by viewModels()
-    private val categoryAdapter by lazy { CategoryAdapter(::onItemClick) }
+    private val wordsViewModel: WordsViewModel by viewModels()
+    private val categoryAdapter by lazy {
+        CategoryAdapter(
+            ::onItemClick,
+            ::onEditClick,
+            ::onDeleteClick
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentCategoriesBinding.inflate(inflater, container, false)
         val view = binding.root
@@ -35,12 +43,10 @@ class CategoriesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        val category = Category("Enes")
-//        categoriesViewModel.addCategory(category)
         categoriesViewModel.getAllCategories()
 
         binding.recyclerView.apply {
-            this.layoutManager = LinearLayoutManager(requireContext())
+            this.layoutManager = LinearLayoutManager(context)
             this.adapter = categoryAdapter
         }
 
@@ -49,9 +55,11 @@ class CategoriesFragment : Fragment() {
                 is Resource.Success -> {
                     categoryAdapter.updateCategoryList(it.data)
                 }
+
                 is Resource.Error -> {
                     Toast.makeText(requireContext(), "ERROR", Toast.LENGTH_SHORT).show()
                 }
+
                 Resource.Loading -> {
                     Toast.makeText(requireContext(), "LOADING", Toast.LENGTH_SHORT).show()
                 }
@@ -65,8 +73,19 @@ class CategoriesFragment : Fragment() {
     }
 
     private fun onItemClick(categoryId: Int) {
-        val action = CategoriesFragmentDirections.actionCategoriesFragmentToWordsFragment(categoryId)
+        val action =
+            CategoriesFragmentDirections.actionCategoriesFragmentToWordsFragment(categoryId)
         findNavController().navigate(action)
+    }
+
+    private fun onEditClick(categoryId: Int) {
+
+    }
+
+    private fun onDeleteClick(position: Int, category: Category) {
+        categoryAdapter.deleteItem(position, category)
+        wordsViewModel.deleteAllWordsFromCategory(category.categoryId)
+        categoriesViewModel.deleteCategory(category)
     }
 
 }

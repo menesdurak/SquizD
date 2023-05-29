@@ -61,6 +61,10 @@ class LocalRepositoryImpl @Inject constructor(
         categoryDao.deleteCategory(category)
     }
 
+    override suspend fun deleteCategoryWithId(categoryId: Int) {
+        categoryDao.deleteCategoryWithId(categoryId)
+    }
+
     override suspend fun getAllCategories(): List<Category> {
         return categoryDao.getAllCategories()
     }

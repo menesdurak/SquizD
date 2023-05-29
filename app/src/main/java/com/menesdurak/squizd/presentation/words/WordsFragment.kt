@@ -40,7 +40,7 @@ class WordsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        val word = Word("Enes", "Durak", categoryId)
+//        val word = Word("Iki", "2", categoryId)
 //        wordsViewModel.addWord(word)
         wordsViewModel.getAllWordsFromCategory(categoryId)
 

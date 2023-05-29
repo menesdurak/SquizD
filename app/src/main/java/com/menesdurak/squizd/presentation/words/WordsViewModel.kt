@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.menesdurak.squizd.common.Resource
 import com.menesdurak.squizd.data.local.entity.Word
 import com.menesdurak.squizd.domain.use_case.words.AddWordUseCase
+import com.menesdurak.squizd.domain.use_case.words.DeleteAllWordsFromCategoryUseCase
 import com.menesdurak.squizd.domain.use_case.words.GetAllWordsFromCategoryUseCase
 import com.menesdurak.squizd.domain.use_case.words.GetAllWordsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,7 +18,8 @@ import javax.inject.Inject
 class WordsViewModel @Inject constructor(
     private val getAllWordsUseCase: GetAllWordsUseCase,
     private val getAllWordsFromCategoryUseCase: GetAllWordsFromCategoryUseCase,
-    private val addWordUseCase: AddWordUseCase
+    private val addWordUseCase: AddWordUseCase,
+    private val deleteAllWordsFromCategoryUseCase: DeleteAllWordsFromCategoryUseCase
 ) : ViewModel() {
 
     private val _wordsList = MutableLiveData<Resource<List<Word>>>(Resource.Loading)
@@ -40,6 +42,12 @@ class WordsViewModel @Inject constructor(
     fun addWord(word: Word) {
         viewModelScope.launch {
             addWordUseCase(word)
+        }
+    }
+
+    fun deleteAllWordsFromCategory(categoryId: Int) {
+        viewModelScope.launch {
+            deleteAllWordsFromCategoryUseCase(categoryId)
         }
     }
 }

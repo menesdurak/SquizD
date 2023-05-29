@@ -21,6 +21,9 @@ interface CategoryDao {
     @Delete
     suspend fun deleteCategory(category: Category)
 
+    @Query("DELETE FROM categories_table WHERE categoryId = :categoryId")
+    suspend fun deleteCategoryWithId(categoryId: Int)
+
     @Query("SELECT * FROM categories_table ORDER BY categoryId ASC")
     suspend fun getAllCategories() : List<Category>
 
