@@ -8,8 +8,8 @@ import com.menesdurak.squizd.common.Resource
 import com.menesdurak.squizd.data.local.entity.Category
 import com.menesdurak.squizd.domain.use_case.categories.AddCategoryUseCase
 import com.menesdurak.squizd.domain.use_case.categories.DeleteCategoryUseCase
-import com.menesdurak.squizd.domain.use_case.categories.DeleteCategoryWithIdUseCase
 import com.menesdurak.squizd.domain.use_case.categories.GetAllCategoriesUseCase
+import com.menesdurak.squizd.domain.use_case.categories.UpdateCategoryWithIdUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -18,8 +18,8 @@ import javax.inject.Inject
 class CategoriesViewModel @Inject constructor(
     private val getAllCategoriesUseCase: GetAllCategoriesUseCase,
     private val addCategoryUseCase: AddCategoryUseCase,
-    private val deleteCategoryUseCase: DeleteCategoryUseCase,
-    private val deleteCategoryWithIdUseCase: DeleteCategoryWithIdUseCase
+    private val updateCategoryWithIdUseCase: UpdateCategoryWithIdUseCase,
+    private val deleteCategoryUseCase: DeleteCategoryUseCase
 ) : ViewModel() {
 
     private val _categoriesList = MutableLiveData<Resource<List<Category>>>(Resource.Loading)
@@ -38,15 +38,15 @@ class CategoriesViewModel @Inject constructor(
         }
     }
 
-    fun deleteCategory(category: Category) {
+    fun updateCategoryWithId(categoryName: String, categoryId: Int) {
         viewModelScope.launch {
-            deleteCategoryUseCase(category)
+            updateCategoryWithIdUseCase(categoryName, categoryId)
         }
     }
 
-    fun deleteCategoryWithId(categoryId: Int) {
+    fun deleteCategory(category: Category) {
         viewModelScope.launch {
-            deleteCategoryWithIdUseCase(categoryId)
+            deleteCategoryUseCase(category)
         }
     }
 }

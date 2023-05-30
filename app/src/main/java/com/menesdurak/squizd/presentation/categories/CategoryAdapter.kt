@@ -8,7 +8,7 @@ import com.menesdurak.squizd.databinding.ItemCategoryBinding
 
 class CategoryAdapter(
     private val onItemClick: (Int) -> Unit,
-    private val onEditClick: (Int) -> Unit,
+    private val onEditClick: (String, Int) -> Unit,
     private val onDeleteClick: (Int, Category) -> Unit,
 ) :
     RecyclerView.Adapter<CategoryAdapter.CategoryHolder>() {
@@ -25,7 +25,7 @@ class CategoryAdapter(
                 onItemClick.invoke(category.categoryId)
             }
             binding.ivEditCategory.setOnClickListener {
-                onEditClick.invoke(category.categoryId)
+                onEditClick.invoke(category.categoryName, category.categoryId)
             }
             binding.ivDeleteCategory.setOnClickListener {
                 onDeleteClick.invoke(adapterPosition, category)

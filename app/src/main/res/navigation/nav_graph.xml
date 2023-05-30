@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_categoriesFragment_to_wordsFragment"
             app:destination="@id/wordsFragment" />
+        <action
+            android:id="@+id/action_categoriesFragment_to_addOrEditCategoryFragment"
+            app:destination="@id/addOrEditCategoryFragment" />
     </fragment>
     <fragment
         android:id="@+id/wordsFragment"
@@ -22,5 +25,25 @@
         <argument
             android:name="categoryId"
             app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/addOrEditCategoryFragment"
+        android:name="com.menesdurak.squizd.presentation.categories.AddOrEditCategoryFragment"
+        android:label="fragment_add_or_edit_category"
+        tools:layout="@layout/fragment_add_or_edit_category" >
+        <argument
+            android:name="categoryId"
+            app:argType="integer"
+            android:defaultValue="-1" />
+        <argument
+            android:name="categoryName"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue=""/>
+        <action
+            android:id="@+id/action_addOrEditCategoryFragment_to_categoriesFragment"
+            app:destination="@id/categoriesFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>

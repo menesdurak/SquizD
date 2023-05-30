@@ -57,6 +57,10 @@ class LocalRepositoryImpl @Inject constructor(
         categoryDao.updateCategory(category)
     }
 
+    override suspend fun updateCategoryWithId(categoryName: String, categoryId: Int) {
+        categoryDao.updateCategoryWithId(categoryName, categoryId)
+    }
+
     override suspend fun deleteCategory(category: Category) {
         categoryDao.deleteCategory(category)
     }

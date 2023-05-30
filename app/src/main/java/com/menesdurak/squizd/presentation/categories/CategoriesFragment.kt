@@ -50,6 +50,12 @@ class CategoriesFragment : Fragment() {
             this.adapter = categoryAdapter
         }
 
+        binding.fabAddCategory.setOnClickListener {
+            val action =
+                CategoriesFragmentDirections.actionCategoriesFragmentToAddOrEditCategoryFragment()
+            findNavController().navigate(action)
+        }
+
         categoriesViewModel.categoriesList.observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Success -> {
@@ -78,8 +84,13 @@ class CategoriesFragment : Fragment() {
         findNavController().navigate(action)
     }
 
-    private fun onEditClick(categoryId: Int) {
-
+    private fun onEditClick(categoryName: String, categoryId: Int) {
+        val action =
+            CategoriesFragmentDirections.actionCategoriesFragmentToAddOrEditCategoryFragment(
+                categoryId = categoryId,
+                categoryName = categoryName
+            )
+        findNavController().navigate(action)
     }
 
     private fun onDeleteClick(position: Int, category: Category) {
