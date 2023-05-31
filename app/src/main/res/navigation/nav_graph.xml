@@ -25,6 +25,9 @@
         <argument
             android:name="categoryId"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_wordsFragment_to_addOrEditWordFragment"
+            app:destination="@id/addOrEditWordFragment" />
     </fragment>
     <fragment
         android:id="@+id/addOrEditCategoryFragment"
@@ -45,5 +48,33 @@
             app:destination="@id/categoriesFragment"
             app:popUpTo="@id/nav_graph"
             app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/addOrEditWordFragment"
+        android:name="com.menesdurak.squizd.presentation.words.AddOrEditWordFragment"
+        android:label="fragment_add_or_edit_word"
+        tools:layout="@layout/fragment_add_or_edit_word" >
+        <action
+            android:id="@+id/action_addOrEditWordFragment_to_wordsFragment"
+            app:destination="@id/wordsFragment"
+            app:popUpTo="@id/wordsFragment"
+            app:popUpToInclusive="true"/>
+        <argument
+            android:name="wordId"
+            app:argType="long"
+            android:defaultValue="-1L" />
+        <argument
+            android:name="wordName"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue=""/>
+        <argument
+            android:name="wordMeaning"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue=""/>
+        <argument
+            android:name="categoryId"
+            app:argType="integer" />
     </fragment>
 </navigation>

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.menesdurak.squizd.common.Resource
@@ -22,16 +23,19 @@ class WordsFragment : Fragment() {
     private val wordsViewModel: WordsViewModel by viewModels()
     private val wordAdapter by lazy { WordAdapter() }
     private var categoryId = 0
+    private var wordId = 0
+    private var wordName = ""
+    private var wordMeaning = ""
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentWordsBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        val args : WordsFragmentArgs by navArgs()
+        val args: WordsFragmentArgs by navArgs()
         categoryId = args.categoryId
 
         return view
@@ -40,8 +44,6 @@ class WordsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        val word = Word("Iki", "2", categoryId)
-//        wordsViewModel.addWord(word)
         wordsViewModel.getAllWordsFromCategory(categoryId)
 
         binding.recyclerView.apply {
@@ -49,14 +51,22 @@ class WordsFragment : Fragment() {
             this.adapter = wordAdapter
         }
 
+        binding.fabAddWord.setOnClickListener {
+            val action =
+                WordsFragmentDirections.actionWordsFragmentToAddOrEditWordFragment(categoryId = categoryId)
+            findNavController().navigate(action)
+        }
+
         wordsViewModel.wordsList.observe(viewLifecycleOwner) {
-            when(it) {
+            when (it) {
                 is Resource.Success -> {
                     wordAdapter.updateWordList(it.data)
                 }
+
                 is Resource.Error -> {
                     Toast.makeText(requireContext(), "ERROR", Toast.LENGTH_SHORT).show()
                 }
+
                 Resource.Loading -> {
                     Toast.makeText(requireContext(), "LOADING", Toast.LENGTH_SHORT).show()
                 }
