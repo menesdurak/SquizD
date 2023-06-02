@@ -13,15 +13,12 @@ class LocalRepositoryImpl @Inject constructor(
     private val categoryDao: CategoryDao,
 ) :
     LocalRepository {
-    override suspend fun getAllWords(): List<Word> {
-        return wordDao.getAllWords()
-    }
 
     override suspend fun getAllWordsFromCategory(categoryId: Int): List<Word> {
         return wordDao.getAllWordsFromCategory(categoryId)
     }
 
-    override suspend fun getWordWithId(wordId: Int): Word {
+    override suspend fun getWordWithId(wordId: Long): Word {
         return wordDao.getWordWithId(wordId)
     }
 
@@ -29,20 +26,8 @@ class LocalRepositoryImpl @Inject constructor(
         wordDao.addWord(word)
     }
 
-    override suspend fun updateWord(word: Word) {
-        wordDao.updateWord(word)
-    }
-
-    override suspend fun updateWordWithId(wordId: Int, wordName: String, wordMeaning: String) {
+    override suspend fun updateWordWithId(wordId: Long, wordName: String, wordMeaning: String) {
         wordDao.updateWordWithId(wordId, wordName, wordMeaning)
-    }
-
-    override suspend fun deleteWord(word: Word) {
-        wordDao.deleteWord(word)
-    }
-
-    override suspend fun deleteAllWords() {
-        wordDao.deleteAllWords()
     }
 
     override suspend fun deleteAllWordsFromCategory(categoryId: Int) {
@@ -53,10 +38,6 @@ class LocalRepositoryImpl @Inject constructor(
         categoryDao.addCategory(category)
     }
 
-    override suspend fun updateCategory(category: Category) {
-        categoryDao.updateCategory(category)
-    }
-
     override suspend fun updateCategoryWithId(categoryName: String, categoryId: Int) {
         categoryDao.updateCategoryWithId(categoryName, categoryId)
     }
@@ -65,16 +46,8 @@ class LocalRepositoryImpl @Inject constructor(
         categoryDao.deleteCategory(category)
     }
 
-    override suspend fun deleteCategoryWithId(categoryId: Int) {
-        categoryDao.deleteCategoryWithId(categoryId)
-    }
-
     override suspend fun getAllCategories(): List<Category> {
         return categoryDao.getAllCategories()
-    }
-
-    override suspend fun getCategoryWithWords(): List<CategoryWithWords> {
-        return categoryDao.getCategoryWithWords()
     }
 
 }

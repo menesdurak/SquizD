@@ -29,8 +29,4 @@ interface CategoryDao {
 
     @Query("SELECT * FROM categories_table ORDER BY categoryId ASC")
     suspend fun getAllCategories() : List<Category>
-
-    @Transaction
-    @Query("SELECT * FROM categories_table")
-    suspend fun getCategoryWithWords() : List<CategoryWithWords>
 }

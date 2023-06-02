@@ -80,7 +80,13 @@ class WordsFragment : Fragment() {
     }
 
     private fun onWordClick(wordId: Long, wordName: String, wordMeaning: String) {
-        Toast.makeText(requireContext(), "$wordId $wordName $wordMeaning", Toast.LENGTH_SHORT).show()
+        val action = WordsFragmentDirections.actionWordsFragmentToAddOrEditWordFragment(
+            categoryId,
+            wordId,
+            wordName,
+            wordMeaning
+        )
+        findNavController().navigate(action)
     }
 
     override fun onDestroyView() {

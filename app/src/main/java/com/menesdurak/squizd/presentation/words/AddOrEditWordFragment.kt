@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.menesdurak.squizd.R
 import com.menesdurak.squizd.data.local.entity.Word
 import com.menesdurak.squizd.databinding.FragmentAddOrEditWordBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -37,6 +38,12 @@ class AddOrEditWordFragment : Fragment() {
         wordName = args.wordName ?: ""
         wordMeaning = args.wordMeaning ?: ""
         categoryId = args.categoryId
+
+        if (wordId != -1L) {
+            binding.etWordName.setText(wordName)
+            binding.etWordMeaning.setText(wordMeaning)
+            binding.btnAdd.text = getString(R.string.update_word)
+        }
 
         return view
     }
@@ -67,6 +74,27 @@ class AddOrEditWordFragment : Fragment() {
                 }
             }
 
+        } else {
+            binding.btnAdd.setOnClickListener {
+                if (binding.etWordName.text.isNotBlank() && binding.etWordMeaning.text.isNotBlank()) {
+                    wordsViewModel.updateWordWithId(
+                        wordId,
+                        binding.etWordName.text.toString(),
+                        binding.etWordMeaning.text.toString()
+                    )
+                    val action =
+                        AddOrEditWordFragmentDirections.actionAddOrEditWordFragmentToWordsFragment(
+                            categoryId
+                        )
+                    findNavController().navigate(action)
+                } else {
+                    Toast.makeText(
+                        context,
+                        "Please enter a valid name and meaning.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
         }
     }
 
