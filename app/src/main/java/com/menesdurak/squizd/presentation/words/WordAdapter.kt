@@ -6,7 +6,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.menesdurak.squizd.data.local.entity.Word
 import com.menesdurak.squizd.databinding.ItemWordBinding
 
-class WordAdapter : RecyclerView.Adapter<WordAdapter.WordHolder>() {
+class WordAdapter(
+    private val onItemClick: (Long, String, String) -> Unit,
+    private val onItemLongClick: (Long) -> Unit
+) : RecyclerView.Adapter<WordAdapter.WordHolder>() {
 
     private val itemList = mutableListOf<Word>()
 
@@ -17,6 +20,15 @@ class WordAdapter : RecyclerView.Adapter<WordAdapter.WordHolder>() {
                 binding.apply {
                     this.tvWordName.text = word.wordName
                     this.tvWordMeaning.text = word.wordMeaning
+                }
+
+                binding.root.setOnClickListener {
+                    onItemClick.invoke(word.wordId, word.wordName, word.wordMeaning)
+                }
+
+                binding.root.setOnLongClickListener {
+                    onItemLongClick.invoke(word.wordId)
+                    true
                 }
             }
     }

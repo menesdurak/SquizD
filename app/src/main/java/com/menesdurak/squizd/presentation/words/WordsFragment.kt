@@ -21,7 +21,8 @@ class WordsFragment : Fragment() {
     private var _binding: FragmentWordsBinding? = null
     private val binding get() = _binding!!
     private val wordsViewModel: WordsViewModel by viewModels()
-    private val wordAdapter by lazy { WordAdapter() }
+    private val wordAdapter by lazy { WordAdapter(::onWordClick, ::onWordLongClick) }
+
     private var categoryId = 0
     private var wordId = 0
     private var wordName = ""
@@ -72,6 +73,14 @@ class WordsFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun onWordLongClick(wordId: Long) {
+        Toast.makeText(requireContext(), "$wordId", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun onWordClick(wordId: Long, wordName: String, wordMeaning: String) {
+        Toast.makeText(requireContext(), "$wordId $wordName $wordMeaning", Toast.LENGTH_SHORT).show()
     }
 
     override fun onDestroyView() {
