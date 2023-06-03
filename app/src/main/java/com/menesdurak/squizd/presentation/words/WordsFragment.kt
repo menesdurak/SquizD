@@ -5,11 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.menesdurak.squizd.R
 import com.menesdurak.squizd.common.Resource
 import com.menesdurak.squizd.data.local.entity.Word
 import com.menesdurak.squizd.databinding.FragmentWordsBinding
@@ -27,6 +30,12 @@ class WordsFragment : Fragment() {
     private var wordId = 0
     private var wordName = ""
     private var wordMeaning = ""
+
+    private val rotateOpen: Animation by lazy { AnimationUtils.loadAnimation(requireContext(), R.anim.rotate_open_anim)}
+    private val rotateClose: Animation by lazy { AnimationUtils.loadAnimation(requireContext(), R.anim.rotate_close_anim)}
+    private val fromBottom: Animation by lazy { AnimationUtils.loadAnimation(requireContext(), R.anim.from_bottom_anim)}
+    private val toBottom: Animation by lazy { AnimationUtils.loadAnimation(requireContext(), R.anim.to_bottom_anim)}
+    private var clicked = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -73,7 +82,60 @@ class WordsFragment : Fragment() {
                 }
             }
         }
+
+        binding.fabMain.setOnClickListener {
+            onMainFabClicked()
+        }
+
+        binding.fabAddWord.setOnClickListener {
+            Toast.makeText(requireContext(), "Add", Toast.LENGTH_SHORT).show()
+        }
+
+        binding.fabGoToQuiz.setOnClickListener {
+            Toast.makeText(requireContext(), "Quiz", Toast.LENGTH_SHORT).show()
+        }
     }
+
+    private fun onMainFabClicked() {
+        setVisibility(clicked)
+        setAnimation(clicked)
+        setClickable(clicked)
+
+        clicked = !clicked
+    }
+
+    private fun setClickable(clicked: Boolean) {
+        if (!clicked) {
+            binding.fabAddWord.isClickable = true
+            binding.fabGoToQuiz.isClickable = true
+        } else {
+            binding.fabAddWord.isClickable = false
+            binding.fabGoToQuiz.isClickable = false
+        }
+    }
+
+    private fun setVisibility(clicked: Boolean) {
+        if (!clicked) {
+            binding.fabAddWord.visibility = View.VISIBLE
+            binding.fabGoToQuiz.visibility = View.VISIBLE
+        } else {
+            binding.fabAddWord.visibility = View.INVISIBLE
+            binding.fabGoToQuiz.visibility = View.INVISIBLE
+        }
+    }
+
+    private fun setAnimation(clicked: Boolean) {
+        if (!clicked) {
+            binding.fabMain.startAnimation(rotateOpen)
+            binding.fabAddWord.startAnimation(fromBottom)
+            binding.fabGoToQuiz.startAnimation(fromBottom)
+        } else {
+            binding.fabGoToQuiz.startAnimation(toBottom)
+            binding.fabAddWord.startAnimation(toBottom)
+            binding.fabMain.startAnimation(rotateClose)
+        }
+    }
+
 
     private fun onWordLongClick(wordId: Long) {
         Toast.makeText(requireContext(), "$wordId", Toast.LENGTH_SHORT).show()
