@@ -213,6 +213,7 @@ class WordsFragment : Fragment() {
             .setPositiveButton("Yes") { _, _ ->
                 wordsViewModel.deleteWordWithId(word.wordId)
                 wordAdapter.deleteItem(position, word)
+                wordsCount--
             }
             .setNegativeButton("No") { _, _ ->
 
@@ -231,6 +232,7 @@ class WordsFragment : Fragment() {
         findNavController().navigate(action)
     }
 
+    //Load ad before showing it to user
     private fun loadInter() {
 
         val adRequest = AdRequest.Builder().build()
@@ -250,6 +252,7 @@ class WordsFragment : Fragment() {
             })
     }
 
+    //Show loaded ad to user
     private fun showInter() {
         if (mInterstitialAd != null) {
             mInterstitialAd?.fullScreenContentCallback = object : FullScreenContentCallback() {
