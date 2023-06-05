@@ -8,6 +8,7 @@ import com.menesdurak.squizd.common.Resource
 import com.menesdurak.squizd.data.local.entity.Word
 import com.menesdurak.squizd.domain.use_case.words.AddWordUseCase
 import com.menesdurak.squizd.domain.use_case.words.DeleteAllWordsFromCategoryUseCase
+import com.menesdurak.squizd.domain.use_case.words.DeleteWordWithIdUseCase
 import com.menesdurak.squizd.domain.use_case.words.GetAllWordsFromCategoryUseCase
 import com.menesdurak.squizd.domain.use_case.words.UpdateWordWithIdUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,7 +20,8 @@ class WordsViewModel @Inject constructor(
     private val getAllWordsFromCategoryUseCase: GetAllWordsFromCategoryUseCase,
     private val addWordUseCase: AddWordUseCase,
     private val deleteAllWordsFromCategoryUseCase: DeleteAllWordsFromCategoryUseCase,
-    private val updateWordWithIdUseCase: UpdateWordWithIdUseCase
+    private val updateWordWithIdUseCase: UpdateWordWithIdUseCase,
+    private val deleteWordWithIdUseCase: DeleteWordWithIdUseCase
 ) : ViewModel() {
 
     private val _wordsList = MutableLiveData<Resource<List<Word>>>(Resource.Loading)
@@ -41,6 +43,12 @@ class WordsViewModel @Inject constructor(
     fun updateWordWithId(wordId: Long, wordName: String, wordMeaning: String) {
         viewModelScope.launch {
             updateWordWithIdUseCase(wordId, wordName, wordMeaning)
+        }
+    }
+
+    fun deleteWordWithId(wordId: Long) {
+        viewModelScope.launch {
+            deleteWordWithIdUseCase(wordId)
         }
     }
 

@@ -22,6 +22,9 @@ interface WordDao {
     @Query("UPDATE words_table SET wordName = :wordName, wordMeaning = :wordMeaning WHERE wordId = :wordId")
     suspend fun updateWordWithId(wordId: Long, wordName: String, wordMeaning: String)
 
+    @Query("DELETE FROM words_table WHERE wordId = :wordId")
+    suspend fun deleteWordWithId(wordId: Long)
+
     @Query("DELETE FROM words_table WHERE categoryOwnerId = :categoryId")
     suspend fun deleteAllWordsFromCategory(categoryId: Int)
 }

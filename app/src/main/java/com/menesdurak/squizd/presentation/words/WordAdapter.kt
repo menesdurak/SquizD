@@ -3,12 +3,13 @@ package com.menesdurak.squizd.presentation.words
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.menesdurak.squizd.data.local.entity.Category
 import com.menesdurak.squizd.data.local.entity.Word
 import com.menesdurak.squizd.databinding.ItemWordBinding
 
 class WordAdapter(
     private val onItemClick: (Long, String, String) -> Unit,
-    private val onItemLongClick: (Long) -> Unit
+    private val onItemLongClick: (Int, Word) -> Unit
 ) : RecyclerView.Adapter<WordAdapter.WordHolder>() {
 
     private val itemList = mutableListOf<Word>()
@@ -27,7 +28,7 @@ class WordAdapter(
                 }
 
                 binding.root.setOnLongClickListener {
-                    onItemLongClick.invoke(word.wordId)
+                    onItemLongClick.invoke(adapterPosition, word)
                     true
                 }
             }
@@ -48,5 +49,10 @@ class WordAdapter(
         itemList.clear()
         itemList.addAll(newList)
         notifyDataSetChanged()
+    }
+
+    fun deleteItem(position: Int, word: Word) {
+        itemList.removeAt(position)
+        notifyItemRemoved(position)
     }
 }

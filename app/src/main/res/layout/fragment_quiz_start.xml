@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/quizStartFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    tools:context=".presentation.quiz.QuizStartFragment"
+    android:background="@color/main">
+
+    <TextView
+        android:id="@+id/textHeaderQuizStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="2dp"
+        android:text="QUIZ"
+        android:textStyle="bold"
+        android:textAllCaps="true"
+        android:textSize="50sp"
+        app:layout_constraintBottom_toTopOf="@+id/textQuizStart"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@color/textColorOpposite"/>
+
+    <TextView
+        android:id="@+id/textQuizStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:elevation="2dp"
+        android:padding="48dp"
+        android:text="welcome_to_the_quiz_page_you_will_be_faced_5_questions_from_your_dictionary_end_of_the_5th_question_you_will_see_your_score_good_luck"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnQuizStart"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textHeaderQuizStart"
+        android:textColor="@color/textColorOpposite"/>
+
+    <Button
+        android:id="@+id/btnQuizStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:backgroundTint="@color/sub3"
+        android:text="Start Quiz"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@color/textColor"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

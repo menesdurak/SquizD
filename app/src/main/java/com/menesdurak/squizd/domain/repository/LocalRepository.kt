@@ -20,6 +20,8 @@ interface LocalRepository {
 
     suspend fun updateCategoryWithId(categoryName: String, categoryId: Int)
 
+    suspend fun deleteWordWithId(wordId: Long)
+
     suspend fun deleteCategory(category: Category)
 
     suspend fun getAllCategories() : List<Category>

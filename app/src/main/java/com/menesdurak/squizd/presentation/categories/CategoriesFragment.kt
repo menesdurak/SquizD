@@ -36,8 +36,7 @@ class CategoriesFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentCategoriesBinding.inflate(inflater, container, false)
-        val view = binding.root
-        return view
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -59,6 +58,7 @@ class CategoriesFragment : Fragment() {
         categoriesViewModel.categoriesList.observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Success -> {
+                    binding.progressBar.visibility = View.GONE
                     categoryAdapter.updateCategoryList(it.data)
                 }
 
@@ -67,7 +67,7 @@ class CategoriesFragment : Fragment() {
                 }
 
                 Resource.Loading -> {
-                    Toast.makeText(requireContext(), "LOADING", Toast.LENGTH_SHORT).show()
+                    binding.progressBar.visibility = View.VISIBLE
                 }
             }
         }

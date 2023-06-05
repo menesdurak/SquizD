@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_wordsFragment_to_addOrEditWordFragment"
             app:destination="@id/addOrEditWordFragment" />
+        <action
+            android:id="@+id/action_wordsFragment_to_quizStartFragment"
+            app:destination="@id/quizStartFragment" />
     </fragment>
     <fragment
         android:id="@+id/addOrEditCategoryFragment"
@@ -75,6 +78,47 @@
             android:defaultValue=""/>
         <argument
             android:name="categoryId"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/quizStartFragment"
+        android:name="com.menesdurak.squizd.presentation.quiz.QuizStartFragment"
+        android:label="fragment_quiz_start"
+        tools:layout="@layout/fragment_quiz_start" >
+        <action
+            android:id="@+id/action_quizStartFragment_to_quizFragment"
+            app:destination="@id/quizFragment" />
+        <argument
+            android:name="categoryId"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/quizFragment"
+        android:name="com.menesdurak.squizd.presentation.quiz.QuizFragment"
+        android:label="fragment_quiz"
+        tools:layout="@layout/fragment_quiz" >
+        <action
+            android:id="@+id/action_quizFragment_to_quizEndFragment"
+            app:destination="@id/quizEndFragment" />
+        <argument
+            android:name="categoryId"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/quizEndFragment"
+        android:name="com.menesdurak.squizd.presentation.quiz.QuizEndFragment"
+        android:label="fragment_quiz_end"
+        tools:layout="@layout/fragment_quiz_end" >
+        <action
+            android:id="@+id/action_quizEndFragment_to_quizStartFragment"
+            app:destination="@id/quizStartFragment" />
+        <action
+            android:id="@+id/action_quizEndFragment_to_categoriesFragment"
+            app:destination="@id/categoriesFragment" />
+        <argument android:name="categoryId"
+            app:argType="integer" />
+        <argument
+            android:name="totalScore"
             app:argType="integer" />
     </fragment>
 </navigation>

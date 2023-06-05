@@ -6,4 +6,8 @@
     <color name="sub">#E21818</color>
     <color name="sub2">#FFDD83</color>
     <color name="sub3">#98DFD6</color>
+    <color name="textColor">#000000</color>
+    <color name="textColorOpposite">#FFFFFF</color>
+    <color name="red">#FF0000</color>
+    <color name="green">#4CAF50</color>
 </resources>

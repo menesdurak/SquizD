@@ -7,6 +7,15 @@
     tools:context=".presentation.words.WordsFragment"
     android:background="@color/main">
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="0dp"
@@ -18,8 +27,9 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAddWord"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:fabCustomSize="50dp"
         android:clickable="true"
         android:focusable="true"
         app:layout_constraintBottom_toTopOf="@id/fabGoToQuiz"
@@ -27,32 +37,36 @@
         app:layout_constraintEnd_toEndOf="@id/fabGoToQuiz"
         android:layout_marginBottom="16dp"
         android:src="@drawable/ic_add"
+        android:backgroundTint="@color/sub2"
         android:visibility="invisible"
         android:contentDescription="Add Word Button"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabGoToQuiz"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:fabCustomSize="50dp"
         android:clickable="true"
         android:focusable="true"
-        app:layout_constraintBottom_toTopOf="@+id/fabMain"
-        app:layout_constraintStart_toStartOf="@+id/fabMain"
+        app:layout_constraintBottom_toTopOf="@id/fabMain"
+        app:layout_constraintStart_toStartOf="@id/fabMain"
         app:layout_constraintEnd_toEndOf="@id/fabMain"
         android:layout_marginBottom="16dp"
-        android:src="@drawable/ic_add"
         android:visibility="invisible"
+        android:src="@drawable/ic_quiz"
+        android:backgroundTint="@color/sub"
         android:contentDescription="Go To Quiz Page Button"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabMain"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        app:fabCustomSize="60dp"
         android:clickable="true"
         android:focusable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:src="@drawable/ic_add"
+        android:src="@drawable/ic_arrow_up"
         android:layout_margin="40dp"
         android:contentDescription="Open Menu Button"/>
 

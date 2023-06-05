@@ -80,6 +80,9 @@ dependencies {
     implementation "androidx.room:room-ktx:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
+
+    //Google Mobile Ads
+    implementation 'com.google.android.gms:play-services-ads:22.1.0'
 }
 // Allow references to generated code
 kapt {
