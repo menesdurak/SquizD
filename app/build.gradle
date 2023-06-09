@@ -83,6 +83,9 @@ dependencies {
 
     //Google Mobile Ads
     implementation 'com.google.android.gms:play-services-ads:22.1.0'
+
+    //Splash Api
+    implementation "androidx.core:core-splashscreen:1.0.1"
 }
 // Allow references to generated code
 kapt {

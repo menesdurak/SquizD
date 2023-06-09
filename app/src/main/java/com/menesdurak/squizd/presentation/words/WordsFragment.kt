@@ -96,12 +96,6 @@ class WordsFragment : Fragment() {
             this.adapter = wordAdapter
         }
 
-        binding.fabAddWord.setOnClickListener {
-            val action =
-                WordsFragmentDirections.actionWordsFragmentToAddOrEditWordFragment(categoryId = categoryId)
-            findNavController().navigate(action)
-        }
-
         wordsViewModel.wordsList.observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Success -> {
@@ -120,18 +114,21 @@ class WordsFragment : Fragment() {
             }
         }
 
+        binding.fabAddWord.setOnClickListener {
+            val action =
+                WordsFragmentDirections.actionWordsFragmentToAddOrEditWordFragment(categoryId = categoryId)
+            findNavController().navigate(action)
+        }
+
         binding.fabMain.setOnClickListener {
             onMainFabClicked()
         }
 
-        binding.fabAddWord.setOnClickListener {
-            val action =
-                WordsFragmentDirections.actionWordsFragmentToAddOrEditWordFragment(categoryId)
-            findNavController().navigate(action)
-        }
-
         binding.fabGoToQuiz.setOnClickListener {
 
+            //If words count is bigger or equal than quiz question count
+            //Go to quiz page
+            //After selected count of quizzes show user an ad
             if (wordsCount >= QUESTION_COUNT) {
                 //Show add to user every three quizzes
                 val sharedPref =
@@ -174,6 +171,7 @@ class WordsFragment : Fragment() {
         clicked = !clicked
     }
 
+    //Set clickable status of floating action menu items
     private fun setClickable(clicked: Boolean) {
         if (!clicked) {
             binding.fabAddWord.isClickable = true
@@ -184,6 +182,7 @@ class WordsFragment : Fragment() {
         }
     }
 
+    //Set visibility of floating action button menu items
     private fun setVisibility(clicked: Boolean) {
         if (!clicked) {
             binding.fabAddWord.visibility = View.VISIBLE
@@ -194,6 +193,7 @@ class WordsFragment : Fragment() {
         }
     }
 
+    //Set animation of floating action buttons
     private fun setAnimation(clicked: Boolean) {
         if (!clicked) {
             binding.fabMain.startAnimation(rotateOpen)
@@ -207,6 +207,7 @@ class WordsFragment : Fragment() {
     }
 
 
+    //On long click, open an alert dialog to user to delete selected word
     private fun onWordLongClick(position: Int, word: Word) {
         val builder = AlertDialog.Builder(requireContext())
         builder.setMessage("Do you want to delete")
