@@ -210,7 +210,7 @@ class WordsFragment : Fragment() {
     //On long click, open an alert dialog to user to delete selected word
     private fun onWordLongClick(position: Int, word: Word) {
         val builder = AlertDialog.Builder(requireContext())
-        builder.setMessage("Do you want to delete")
+        builder.setMessage("Do you want to delete ${word.wordName}?")
             .setPositiveButton("Yes") { _, _ ->
                 wordsViewModel.deleteWordWithId(word.wordId)
                 wordAdapter.deleteItem(position, word)

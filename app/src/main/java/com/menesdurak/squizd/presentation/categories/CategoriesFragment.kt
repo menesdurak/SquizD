@@ -1,5 +1,6 @@
 package com.menesdurak.squizd.presentation.categories
 
+import android.app.AlertDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -94,9 +95,18 @@ class CategoriesFragment : Fragment() {
     }
 
     private fun onDeleteClick(position: Int, category: Category) {
-        categoryAdapter.deleteItem(position, category)
-        wordsViewModel.deleteAllWordsFromCategory(category.categoryId)
-        categoriesViewModel.deleteCategory(category)
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setMessage("Do you want to delete ${category.categoryName}?")
+            .setPositiveButton("Yes") { _, _ ->
+                categoryAdapter.deleteItem(position, category)
+                wordsViewModel.deleteAllWordsFromCategory(category.categoryId)
+                categoriesViewModel.deleteCategory(category)
+            }
+            .setNegativeButton("No") { _, _ ->
+
+            }
+        builder.create()
+        builder.show()
     }
 
 }
