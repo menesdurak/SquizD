@@ -119,6 +119,7 @@ class QuizFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.textAnswer1.setOnClickListener {
+            disableClickable()
             //If clicked answer is wrong, set background color red
             if (binding.textAnswer1.text.toString() != rightAnswerList[passedQuestionCount - 1]) {
                 binding.textAnswer1.setBackgroundColor(resources.getColor(R.color.red, null))
@@ -155,6 +156,7 @@ class QuizFragment : Fragment() {
         }
 
         binding.textAnswer2.setOnClickListener {
+            disableClickable()
             if (binding.textAnswer2.text.toString() != rightAnswerList[passedQuestionCount - 1]) {
                 binding.textAnswer2.setBackgroundColor(resources.getColor(R.color.red, null))
             }
@@ -184,6 +186,7 @@ class QuizFragment : Fragment() {
         }
 
         binding.textAnswer3.setOnClickListener {
+            disableClickable()
             if (binding.textAnswer3.text.toString() != rightAnswerList[passedQuestionCount - 1]) {
                 binding.textAnswer3.setBackgroundColor(resources.getColor(R.color.red, null))
             }
@@ -213,6 +216,7 @@ class QuizFragment : Fragment() {
         }
 
         binding.textAnswer4.setOnClickListener {
+            disableClickable()
             if (binding.textAnswer4.text.toString() != rightAnswerList[passedQuestionCount - 1]) {
                 binding.textAnswer4.setBackgroundColor(resources.getColor(R.color.red, null))
             }
@@ -267,6 +271,7 @@ class QuizFragment : Fragment() {
         binding.textAnswer3.text = answersList[2]
         binding.textAnswer4.text = answersList[3]
         passedQuestionCount++
+        enableClickable()
     }
 
     //Highlight the background of true answer
@@ -292,6 +297,20 @@ class QuizFragment : Fragment() {
         binding.textAnswer2.setBackgroundColor(resources.getColor(R.color.sub3, null))
         binding.textAnswer3.setBackgroundColor(resources.getColor(R.color.sub3, null))
         binding.textAnswer4.setBackgroundColor(resources.getColor(R.color.sub3, null))
+    }
+
+    private fun disableClickable() {
+        binding.textAnswer1.isClickable = false
+        binding.textAnswer2.isClickable = false
+        binding.textAnswer3.isClickable = false
+        binding.textAnswer4.isClickable = false
+    }
+
+    private fun enableClickable() {
+        binding.textAnswer1.isClickable = true
+        binding.textAnswer2.isClickable = true
+        binding.textAnswer3.isClickable = true
+        binding.textAnswer4.isClickable = true
     }
 
 }
