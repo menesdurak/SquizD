@@ -6,4 +6,11 @@
     <string name="update_word">Update Word</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="quiz">QUIZ</string>
+    <string name="welcome_to_the_quiz_page_you_will_be_faced_5_questions_from_your_dictionary_end_of_the_5th_question_you_will_see_your_score_good_luck">Welcome to the quiz page. You will be faced 5 questions from your dictionary. End of the 5th question you will see your score. Good luck!</string>
+    <string name="start_quiz">Start Quiz</string>
+    <string name="finish">FINISH</string>
+    <string name="total_score">Total Score :</string>
+    <string name="restart_quiz">Restart Quiz</string>
+    <string name="go_to_categories">Go To Categories</string>
 </resources>
