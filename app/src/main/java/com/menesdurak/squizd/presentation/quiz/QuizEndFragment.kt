@@ -83,10 +83,11 @@ class QuizEndFragment : Fragment() {
                 }
             }
 
-            binding.buttonQuizFinishGoToCategories.setOnClickListener {
-                val action = QuizEndFragmentDirections.actionQuizEndFragmentToCategoriesFragment()
-                findNavController().navigate(action)
-            }
+        }
+
+        binding.buttonQuizFinishGoToCategories.setOnClickListener {
+            val action = QuizEndFragmentDirections.actionQuizEndFragmentToCategoriesFragment()
+            findNavController().navigate(action)
         }
     }
 
