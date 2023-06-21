@@ -63,6 +63,7 @@ class QuizFragment : Fragment() {
         wordsViewModel.wordsList.observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Success -> {
+                    binding.progressBar.visibility = View.GONE
                     //Create an array of random integers between 0 and list size - 1
                     randomIntArray = setRandomIntArray(it.data)
 
@@ -106,7 +107,7 @@ class QuizFragment : Fragment() {
                 }
 
                 Resource.Loading -> {
-                    Toast.makeText(requireContext(), "LOADING", Toast.LENGTH_SHORT).show()
+                    binding.progressBar.visibility = View.VISIBLE
                 }
             }
         }
