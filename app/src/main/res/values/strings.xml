@@ -13,4 +13,7 @@
     <string name="total_score">Total Score :</string>
     <string name="restart_quiz">Restart Quiz</string>
     <string name="go_to_categories">Go To Categories</string>
+    <string name="word_name">Word Name</string>
+    <string name="word_meaning">Word Meaning</string>
+    <string name="category_name">Category Name</string>
 </resources>

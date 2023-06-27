@@ -32,7 +32,7 @@
                 android:background="@drawable/rounded_corner"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
-                tools:hint="Word Name"
+                android:hint="@string/word_name"
                 android:textSize="36sp"
                 android:importantForAutofill="no"
                 android:inputType="text" />
@@ -46,7 +46,7 @@
                 android:background="@drawable/rounded_corner"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
-                tools:hint="Word Meaning"
+                android:hint="@string/word_meaning"
                 android:textSize="36sp"
                 android:importantForAutofill="no"
                 android:inputType="text" />
