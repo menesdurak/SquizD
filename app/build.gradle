@@ -14,10 +14,14 @@ android {
         applicationId "com.menesdurak.squizd"
         minSdk 24
         targetSdk 33
-        versionCode 1
-        versionName "1.0"
+        versionCode 4
+        versionName "1.1.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        Properties properties = new Properties()
+        properties.load(project.rootProject.file('local.properties').newDataInputStream())
+        manifestPlaceholders = [adKey: "${properties.getProperty('AD_KEY')}"]
     }
 
     buildTypes {
